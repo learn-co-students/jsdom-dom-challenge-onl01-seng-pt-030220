@@ -28,7 +28,7 @@ let heart = document.querySelector('#heart')
 
 heart.addEventListener('click', () => {
   let counterNumber = counter.innerText
-  if(likes[counterNumber] == undefined){
+  if(likes[counterNumber] === undefined){
     likes[counterNumber] = 1
   } else {
     likes[counterNumber]++
