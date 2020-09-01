@@ -7,7 +7,7 @@ const form = document.getElementById("comment-form")
 
 const comment = document.getElementById("")
 
-const interval = setInterval(timer, 1000);
+let interval = setInterval(timer, 1000);
 
 
 //var c = 0
@@ -17,31 +17,26 @@ function timer() {
         //counter.innerHTML = c;
         // c = c + 1;
 }
+timer()
 
-
-
-
-function pauseTime() {
+pause.addEventListener("click", function(e) {
     if (pause.innerText == "pause") {
-        pause.addEventListener("click", function(e) {
-            clearInterval(interval)
-            pause.innerText = "resume"
-            start()
-
-        })
+        stop()
+    } else if (pause.innerText == "resume") {
+        start()
     }
+})
 
+function stop() {
+    clearInterval(interval)
+    pause.innerText = "resume"
 }
-pauseTime()
+
 
 function start() {
-    if (pause.innerText == "resume") {
-        pause.addEventListener("click", function(e) {
-            timer()
-            setInterval(timer, 1000);
-            pause.innerText = "pause"
-        })
-    }
+
+    interval = setInterval(timer, 1000);
+    pause.innerText = "pause"
 }
 
 function increment() {
@@ -71,12 +66,14 @@ function likeCounter() {
 
         c = c + 1
 
+        let text1 = document.createTextNode(`${counter.innerText} has ${c} likes`)
+        const newtag1 = document.createElement("h3")
+        newtag1.appendChild(text1)
+        document.body.append(newtag1)
     })
 
 }
 likeCounter()
-
-
 
 function comments() {
 
