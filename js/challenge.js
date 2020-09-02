@@ -2,21 +2,13 @@ function appendComment(commentInput){
     // console.log(commentInput, "this is comment input")
     const list = document.querySelector('#list')
     const ul = document.createElement('ul')
-    const updates = list.appendChild(ul)
-        updates.innerHTML = `<li>${commentInput}<button id="delete">delete</button></li>`
-    deleteComment()
+    let button = document.createElement("button")
+    let li = document.createElement("li")
+    li.innerHTML = `<li>${commentInput}</li>`
+    button.textContent = "Delete";
+    button.addEventListener("click", (event) => event.target.parentNode.remove());
+    list.appendChild(ul).appendChild(li).appendChild(button)
 }
-
-function deleteComment(){
-    const button = document.querySelector('button#delete')
-    button.addEventListener('click', (event) => {
-       console.log(event.target.parentNode)
-       const li = event.target.parentNode
-       li.remove()
-    })   
-}
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
     let form = document.querySelector('form')
