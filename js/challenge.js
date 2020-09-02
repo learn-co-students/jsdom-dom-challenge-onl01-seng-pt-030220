@@ -32,13 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let pause = document.querySelector('button#pause')
         pause.addEventListener('click', (event) => {
-            var containsClass = pause.classList.contains("pause")
+            var containsPause = pause.classList.contains("pause")
 
-            if containsClass
-                console.log(containsClass, "contains clss")
+            if(containsPause){
+                console.log(containsPause, "contains clss")
                 clearInterval(interval)
-            else 
+                pause.classList.remove("pause");
+            }
+            else {
+               pause.className = "pause";
+               increment()
+            //    setInterval(increment, 1000)
                 //put class back on and continue interval
+            }
         })
 
   });
