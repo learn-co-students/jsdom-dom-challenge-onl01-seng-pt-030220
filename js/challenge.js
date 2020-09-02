@@ -1,7 +1,9 @@
 function appendComment(commentInput){
     // console.log(commentInput, "this is comment input")
-    
-
+       const list = document.querySelector('#list')
+        const ul = document.createElement('ul')
+        const updates = list.appendChild(ul)
+        updates.innerHTML = `<li>${commentInput}</li>`
 }
 
 
@@ -10,10 +12,11 @@ function appendComment(commentInput){
 document.addEventListener("DOMContentLoaded", () => {
     let form = document.querySelector('form')
     // console.log(form, "this is form")
-    form.addEventListener('click', (event) => {
+    form.addEventListener('submit', (event) => {
         event.preventDefault()
         const commentInput = document.querySelector('#comment-input').value
         appendComment(commentInput)
+      
     })
 
     let i =-1;
