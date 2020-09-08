@@ -1,3 +1,58 @@
+
+const counter = document.getElementById("counter")
+const plus = document.getElementById("plus")
+const minus = document.getElementById("minus")
+const pause = document.getElementById("pause")
+const commentForm = document.getElementById("comment-form")
+const likes = document.querySelector(".likes")
+const list = document.getElementById("list")
+const heart = document.getElementById("heart")
+let paused = false
+
+
+setInterval(countUp, 1000)
+
+function countUp(){
+    if (!paused){
+    counter.innerText++
+    }
+}
+
+function countDown(){
+    if (!paused){
+    counter.innerText--
+    }
+}
+
+plus.addEventListener("click", countUp)
+minus.addEventListener("click", countDown)
+pause.addEventListener("click", ()=>{
+    paused = !paused
+    toggleButtons()
+})
+
+function toggleButtons(){
+    document.querySelectorAll("button").forEach(btn => {
+        if (btn.id !== "pause"){
+            btn.disabled = !btn.disabled
+        }
+    })
+}
+
+function like(){
+    let currentSecond = counter.innerText
+    let li = document.getElementById(`second-${currentSecond}`)
+    if(li){
+        li.innerText = `${currentSecond} has been liked ${++li.dataset.likes} times.`
+        // (console.log(li, "has already been liked"))
+    } else {
+        likes.innerHTML += `<li id=second-${currentSecond} data-likes=1>${currentSecond} has been liked 1 time </li>`
+    } 
+}
+
+heart.addEventListener("click", like)
+
+
 function appendComment(commentInput){
     // console.log(commentInput, "this is comment input")
     const list = document.querySelector('#list')
@@ -10,42 +65,8 @@ function appendComment(commentInput){
     list.appendChild(ul).appendChild(li).appendChild(button)
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    let form = document.querySelector('form')
-    // console.log(form, "this is form")
-    form.addEventListener('submit', (event) => {
-        event.preventDefault()
-        const commentInput = document.querySelector('#comment-input').value
-        appendComment(commentInput)
-      
-    })
-
-    let i =-1;
-    let j = 0;
-    let interval = setInterval( increment, 1000);
-        function increment(){
-            i++;
-            document.querySelector('h1#counter').innerText = i;
-            j = 0;
-        }
-    increment();
-
-    let pause = document.querySelector('button#pause')
-        pause.addEventListener('click', (event) => {
-            var containsPause = pause.classList.contains("pause")
-
-            if(containsPause){
-                console.log(containsPause, "contains clss")
-                clearInterval(interval)
-                pause.classList.remove("pause");
-            }
-            else {
-               pause.className = "pause";
-               increment()
-            //    setInterval(increment, 1000)
-                //put class back on and continue interval
-            }
-        })
-
-  });
-  
+commentForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const commentInput = document.querySelector('#comment-input').value
+    appendComment(commentInput)
+})
