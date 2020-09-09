@@ -31,7 +31,7 @@ function appendLike(){
     if (li) {
         let text = li.innerText
         let arr = text.split(" ")
-        let number = Number(arr.slice(-2,-1))
+        let number = parseInt(arr.slice(-2,-1))
         li.innerHTML = `${currentTime} has been liked ${number + 1} times`
     }
     else {
